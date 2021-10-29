@@ -41,6 +41,24 @@ Seats Schema <br>
 }
 </b>
 
+## Seat Selection Algorithm
+- Input  [ Seats (availability array), n (number of seats to book)]
+- We have a boolean array of size 80 as representaion of seats.
+- First we'll divide boolean array into 10 rows of size 8 each
+- <b>Step 1:</b> For each row we will select n  ones which are closest to each other
+   - For doing that we will follow a sliding window approach  
+   - First we take n available seats from start of the row and calculate the cost (which is summation of differnce betweent the positions of the seats)
+   - Select Next available seat and pop out the first seat then recalculate the distance
+   - Repeat the above process till we have exhausted the entire row and select that group which has least cost.
+   - Store its [index , cost]
+- <b>Step 2:</b> After doing the previous step we'll have an array of possible positions in some rows (some rows may be rejected due to too few seats available). Next step is to again take the least cost group and since we already stored index with cost we can start from that corresponding index and take n seats.
+- <b>After following Step 1 and 2 it is possible that there are n seats available but in not in a single row now in this case we have to give seats in different rows. </b>
+- <b>Step 3:</b> Select first n available seats from all 80 seats and allocate them.
+
+<b>This way if seats are availabe then it is guaranteed that user will get a seat.</b>
+
+
+<br>
 
 ## Possible Improvements
 - I am assuming a single user is booking the ticket so i havent used any userId to track who is booking the ticket. However with an effort of few hours this functionality could be added easily.
